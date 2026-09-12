@@ -25,7 +25,7 @@ export async function POST(request) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-20b',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userMessage }
@@ -36,10 +36,13 @@ export async function POST(request) {
     })
 
     if (!response.ok) {
+      const errorText = await response.text()
+      console.error(`Groq API failed: ${response.status} - ${errorText}`)
       throw new Error(`Groq API responded with status ${response.status}`)
     }
 
     const result = await response.json()
+    console.log("Coach API Success Result:", JSON.stringify(result, null, 2))
     const insight = result.choices?.[0]?.message?.content || "Keep grinding, Runner! Every completed mission makes you stronger."
 
     return NextResponse.json({ insight })
