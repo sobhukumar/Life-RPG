@@ -1,6 +1,8 @@
 import { Rubik } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { ThemeProvider } from '@/contexts/ThemeContext'
+import ChatWidget from '@/components/ChatWidget'
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -26,9 +28,12 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${rubik.variable} font-rubik bg-[#170f27] text-[#eaddff] overscroll-none`}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            {children}
+            <ChatWidget />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

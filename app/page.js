@@ -109,7 +109,7 @@ export default function LandingPage() {
           }}
         />
         
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
           {/* Text Content */}
           <TiltCard className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
             <div className="inline-flex items-center gap-2 bg-[#120a21] px-4 py-1.5 rounded-full border-[3px] border-[#39304a] shadow-[0_4px_0_#120a21] mb-6" style={{ transform: "translateZ(40px)" }}>
@@ -117,7 +117,7 @@ export default function LandingPage() {
               <span className="font-black text-[12px] uppercase tracking-widest text-[#ffba20]">SYSTEM v2.4 ONLINE</span>
             </div>
             
-            <h1 className="font-black text-[56px] md:text-[80px] leading-[1.1] uppercase text-[#ffb0cd] drop-shadow-[0_6px_0_#120a21] mb-6 overflow-visible" style={{ transform: "translateZ(80px)" }}>
+            <h1 className="font-black text-[48px] sm:text-[56px] md:text-[80px] leading-[1.1] uppercase text-[#ffb0cd] drop-shadow-[0_6px_0_#120a21] mb-6 overflow-visible" style={{ transform: "translateZ(80px)" }}>
               <motion.span 
                 initial={{ y: 100, rotateX: 90 }} 
                 animate={{ y: 0, rotateX: 0 }} 
@@ -161,8 +161,8 @@ export default function LandingPage() {
             </Link>
           </TiltCard>
           
-          {/* Parallax Mascot */}
-          <TiltCard className="flex-1 relative h-[350px] md:h-[500px] w-full max-w-md mt-12 md:mt-0">
+          {/* Parallax Mascot — always visible */}
+          <TiltCard className="flex-1 relative h-[280px] sm:h-[350px] md:h-[500px] w-full max-w-sm md:max-w-md">
             <motion.div 
               className="absolute inset-0 bg-[#ff45a3] rounded-full blur-[100px] opacity-20"
               animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
@@ -175,10 +175,9 @@ export default function LandingPage() {
               className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_0_rgba(18,10,33,0.9)] z-20"
               style={{ x: mousePos.x * -2, y: mousePos.y * -2, transform: "translateZ(80px)" }}
             />
-            {/* Floating elements around mascot */}
+            {/* Floating elements */}
             <motion.div 
               className="absolute top-10 left-0 bg-[#00e3fd] text-[#00363d] font-black text-[14px] px-4 py-2 rounded-xl border-[3px] border-[#120a21] shadow-[0_4px_0_#120a21] z-30 uppercase"
-              style={{ x: mousePos.x * 2.5, y: mousePos.y * 2.5, transform: "translateZ(120px)" }}
               animate={{ y: [-10, 10, -10], rotateZ: [-5, 5, -5] }}
               transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
             >
@@ -186,7 +185,6 @@ export default function LandingPage() {
             </motion.div>
             <motion.div 
               className="absolute bottom-20 right-0 bg-[#ffba20] text-[#271900] font-black text-[14px] px-4 py-2 rounded-xl border-[3px] border-[#120a21] shadow-[0_4px_0_#120a21] z-30 uppercase"
-              style={{ x: mousePos.x * 3.5, y: mousePos.y * 3.5, transform: "translateZ(140px)" }}
               animate={{ y: [10, -10, 10], rotateZ: [5, -5, 5] }}
               transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
             >

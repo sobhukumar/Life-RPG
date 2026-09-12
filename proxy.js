@@ -33,14 +33,14 @@ export async function proxy(request) {
   const isHomePage = url.pathname === '/'
   const isProtected = !isAuthPage && !isHomePage
 
-  // Redirect unauthenticated users to login
+  // Redirect unauthenticated users away from protected pages
   if (!user && isProtected) {
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  // Redirect logged-in users away from login page and home page
-  if (user && (isAuthPage || isHomePage)) {
+  // Redirect logged-in users away from the login page only (not home page)
+  if (user && isAuthPage) {
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)
   }

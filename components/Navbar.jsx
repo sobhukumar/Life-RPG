@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
@@ -21,12 +21,12 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
-    router.push('/login')
+    window.location.href = '/'
   }
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-[#120a21] border-b-4 border-[#120a21] shadow-[0_6px_0_#0B0616]">
+      <header className="fixed top-0 w-full z-50 bg-[#120a21] border-b-4 border-[#2e263f] shadow-[0_6px_0_#0B0616]">
         <div className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -57,13 +57,13 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Side: Coins + Level */}
+          {/* Right Side */}
           <div className="flex items-center gap-3">
             {character && (
               <>
-                <div className="flex items-center gap-2 bg-[#ffdea8] text-[#271900] font-black text-[14px] px-4 py-2 rounded-full border-[3px] border-[#120a21] shadow-[0_4px_0_#120a21] uppercase tracking-wider" style={{ fontFamily: 'Rubik' }}>
+                <div className="hidden sm:flex items-center gap-2 bg-[#ffdea8] text-[#271900] font-black text-[14px] px-4 py-2 rounded-full border-[3px] border-[#120a21] shadow-[0_4px_0_#120a21] uppercase tracking-wider" style={{ fontFamily: 'Rubik' }}>
                   <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>monetization_on</span>
-                  <span>{character.coins.toLocaleString()} Coins</span>
+                  <span>{character.coins.toLocaleString()}</span>
                 </div>
                 <div className="relative flex items-center">
                   <div className="w-9 h-9 rounded-full bg-[#ffb0cd] flex items-center justify-center border-2 border-[#120a21] shadow-[0_3px_0_#120a21]">
@@ -75,6 +75,9 @@ export default function Navbar() {
                 </div>
               </>
             )}
+
+            {/* Theme Toggle */}
+            <ThemeToggleButton />
 
             {/* Mobile hamburger */}
             <button
@@ -126,5 +129,37 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </>
+  )
+}
+
+function ThemeToggleButton() {
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('neon-theme') || 'dark'
+    setTheme(saved)
+  }, [])
+
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    localStorage.setItem('neon-theme', next)
+    document.documentElement.setAttribute('data-theme', next)
+    document.body.style.backgroundColor = next === 'light' ? '#f4f0fb' : '#170f27'
+    document.body.style.color = next === 'light' ? '#1a0d2e' : '#eaddff'
+  }
+
+  return (
+    <motion.button
+      whileHover={{ y: -2 }}
+      whileTap={{ y: 1 }}
+      onClick={toggle}
+      className="w-10 h-10 rounded-xl bg-[#231b34] border-[3px] border-[#120a21] shadow-[0_3px_0_#120a21] flex items-center justify-center text-[#eaddff] hover:bg-[#00e3fd] hover:text-[#00363d] transition-colors"
+      title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+    >
+      <span className="material-symbols-outlined text-[20px]">
+        {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+      </span>
+    </motion.button>
   )
 }

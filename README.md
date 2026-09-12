@@ -4,6 +4,20 @@
 
 A full-stack gamified productivity app built with **Next.js 15**, **Supabase**, and **Framer Motion**.
 
+🔗 **Live App:** [life-rpg-rho-one.vercel.app](https://life-rpg-rho-one.vercel.app)
+📹 **Walkthrough Video:** [add your video link here]
+
+---
+
+## 👥 Team
+
+- [Dibyanshu Singh] — [Backend Developer]
+- [Gourav Kumar Das] — [Testing & Documentation]
+- [Barsha Rani Mahakud] — [AI Integration & Unique Features]
+- [Soubhagya Kumar Rout] — [Frontend & UI/UX Developer]
+
+
+
 ---
 
 ## ✨ Features
@@ -17,6 +31,9 @@ A full-stack gamified productivity app built with **Next.js 15**, **Supabase**, 
 - 👾 **Boss Battle** — Weekly boss with HP bar, countdown timer, victory overlay
 - 🔥 **Streaks** — Daily streak tracking with mood-based mascot animation
 - 📊 **Attributes** — Task categories map to RPG stats (Intellect, Strength, Agility, Discipline)
+- 🤖 **AI Coach** — Personalized weekly insight generated from your real progress data (Groq API)
+- 💬 **Help Chatbot** — In-app assistant that answers "how do I use this?" questions (Groq API)
+- 🌓 **Dark / Light Mode** — Full theme toggle
 - 💾 **Full Persistence** — All data persists in Supabase on refresh
 
 ---
@@ -48,9 +65,11 @@ cp .env.example .env.local
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+GROQ_API_KEY=your-groq-api-key
 ```
 
-Find these in: **Supabase Dashboard → Project Settings → API**
+Find your Supabase keys in: **Supabase Dashboard → Project Settings → API**
+Get a free Groq API key at: **[console.groq.com/keys](https://console.groq.com/keys)**
 
 ### 4. Run Locally
 
@@ -111,9 +130,25 @@ Row Level Security is enabled on all tables.
 | Frontend | Next.js 15 (App Router) |
 | Styling | Tailwind CSS v4 (Neon Drift design tokens) |
 | Auth + DB | Supabase (PostgreSQL + Auth + RLS) |
+| AI | Groq API (`openai/gpt-oss-20b`) — AI Coach & Help Chatbot |
 | Animation | Framer Motion + canvas-confetti |
 | Font | Rubik (Google Fonts) |
 | Deploy | Vercel |
+
+---
+
+## 📢 Disclosures (AI Tools, APIs & Templates)
+
+As required by the hackathon rules, all third-party tools and AI assistance used are disclosed here:
+
+| Tool / Service | Used For |
+|---|---|
+| **Groq API** (`openai/gpt-oss-20b`) | Powers the AI Coach (personalized insights) and the in-app Help Chatbot |
+| **Google Stitch** | Used to generate the initial UI design/layout, which was then customized, cleaned up, and wired to real functionality |
+| **Claude / AI coding assistant** | Used to help write and debug application code (backend logic, database integration, feature implementation) |
+| **Supabase** | Backend-as-a-Service for Auth, PostgreSQL database, and Row Level Security |
+
+No plagiarized or undisclosed course/tutorial code was used. All core logic (task CRUD, XP/leveling, streaks, attributes, shop, boss battle) was implemented and tested specifically for this hackathon submission.
 
 ---
 
@@ -157,8 +192,9 @@ Row Level Security is enabled on all tables.
 - [x] Mobile responsive layout
 - [x] Mobile hamburger nav
 - [x] Keyboard accessible (Tab/Enter on all interactive elements)
+- [x] Dark / Light mode toggle
+- [x] AI Coach — personalized insight generated from real user data (Groq API)
+- [x] In-app Help Chatbot for onboarding questions (Groq API)
 - [x] All data persists in Supabase on refresh
 
 ---
-
-Built for Hackathon 2026 🏆

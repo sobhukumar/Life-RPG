@@ -59,7 +59,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     setLogoutLoading(true)
     await supabase.auth.signOut()
-    router.push('/login')
+    window.location.href = '/'
   }
 
   const totalXP = character
