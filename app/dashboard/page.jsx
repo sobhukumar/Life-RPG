@@ -13,6 +13,40 @@ export default function DashboardPage() {
   const [tasks, setTasks] = useState([])
   const [tasksLoading, setTasksLoading] = useState(true)
   const [fetchError, setFetchError] = useState(null)
+  const [coachLoading, setCoachLoading] = useState(false)
+  const [coachMessage, setCoachMessage] = useState(null)
+
+  const getCoachInsight = async () => {
+    setCoachLoading(true)
+    setCoachMessage(null)
+    try {
+      const { count } = await supabase
+        .from('tasks')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', user.id)
+        .eq('completed', true)
+
+      const res = await fetch('/api/coach', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          level: character?.level ?? 1,
+          streak: character?.streak_count ?? 0,
+          completedTasksCount: count || 0,
+          attributes: attributes.map(a => ({ name: a.name, value: a.value }))
+        })
+      })
+
+      if (!res.ok) throw new Error('Failed to fetch insight')
+      
+      const data = await res.json()
+      setCoachMessage(data.insight || "Keep grinding, Runner! Every completed mission makes you stronger.")
+    } catch (err) {
+      setCoachMessage("Keep grinding, Runner! Every completed mission makes you stronger.")
+    } finally {
+      setCoachLoading(false)
+    }
+  }
 
   useEffect(() => {
     if (character) updateStreak()
@@ -95,6 +129,20 @@ export default function DashboardPage() {
                   </div>
                 </motion.div>
 
+                {/* AI Coach Speech Bubble */}
+                {(coachMessage || coachLoading) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className="absolute -top-24 left-0 sm:-left-12 z-30 bg-[#39304a] px-4 py-3 rounded-2xl border-[3px] border-[#120a21] shadow-[0_6px_0_#120a21] max-w-[240px]"
+                  >
+                    <p className="font-bold text-[13px] text-[#9cf0ff]" style={{ fontFamily: 'Rubik' }}>
+                      {coachLoading ? "Coach is thinking..." : coachMessage}
+                    </p>
+                    <div className="absolute -bottom-2 right-6 w-4 h-4 bg-[#39304a] border-b-[3px] border-r-[3px] border-[#120a21] rotate-45" />
+                  </motion.div>
+                )}
+
                 {/* Mascot */}
                 <div className={streakActive ? 'mascot-idle-float' : 'mascot-sad'}>
                   <img
@@ -108,6 +156,17 @@ export default function DashboardPage() {
                 <div className="relative -mt-4 w-60 sm:w-72 h-12 bg-[#2e263f] rounded-[100%] border-4 border-[#120a21] shadow-[0_8px_0_#120a21] flex items-center justify-center overflow-hidden">
                   <div className="w-44 h-5 bg-[#00e3fd] rounded-full blur-[2px] opacity-80 animate-pulse" />
                 </div>
+                
+                {/* AI Coach Button */}
+                <button
+                  onClick={getCoachInsight}
+                  disabled={coachLoading}
+                  className="mt-6 z-20 group inline-flex items-center gap-2 bg-[#00e3fd] text-[#00363d] font-black text-[14px] uppercase px-4 py-2 rounded-2xl border-[3px] border-[#120a21] shadow-[0_5px_0_#120a21] hover:-translate-y-1 hover:shadow-[0_8px_0_#120a21] transition-all disabled:opacity-50"
+                  style={{ fontFamily: 'Rubik' }}
+                >
+                  <span className="material-symbols-outlined text-[18px]">smart_toy</span>
+                  Get Weekly Insight
+                </button>
               </div>
             </div>
 
