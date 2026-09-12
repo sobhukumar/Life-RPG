@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-rubik: "Rubik", sans-serif;
+
+  /* Neon Drift Color Palette */
+  --color-surface: #170f27;
+  --color-surface-dim: #170f27;
+  --color-surface-bright: #3e354f;
+  --color-surface-container-lowest: #120a21;
+  --color-surface-container-low: #1f1730;
+  --color-surface-container: #231b34;
+  --color-surface-container-high: #2e263f;
+  --color-surface-container-highest: #39304a;
+  --color-on-surface: #eaddff;
+  --color-on-surface-variant: #e1bdc8;
+  --color-inverse-surface: #eaddff;
+  --color-inverse-on-surface: #352c46;
+  --color-surface-variant: #39304a;
+  --color-surface-tint: #ffb0cd;
+  --color-background: #170f27;
+  --color-on-background: #eaddff;
+  --color-outline: #a98893;
+  --color-outline-variant: #5a3f49;
+
+  /* Primary - Hot Pink */
+  --color-primary: #ffb0cd;
+  --color-on-primary: #640039;
+  --color-primary-container: #ff45a3;
+  --color-on-primary-container: #570032;
+  --color-primary-fixed: #ffd9e4;
+  --color-primary-fixed-dim: #ffb0cd;
+  --color-on-primary-fixed: #3e0022;
+  --color-on-primary-fixed-variant: #8c0053;
+  --color-inverse-primary: #b7006e;
+
+  /* Secondary - Electric Cyan */
+  --color-secondary: #bdf4ff;
+  --color-on-secondary: #00363d;
+  --color-secondary-container: #00e3fd;
+  --color-on-secondary-container: #00616d;
+  --color-secondary-fixed: #9cf0ff;
+  --color-secondary-fixed-dim: #00daf3;
+  --color-on-secondary-fixed: #001f24;
+  --color-on-secondary-fixed-variant: #004f58;
+
+  /* Tertiary - Reward Gold */
+  --color-tertiary: #ffba20;
+  --color-on-tertiary: #412d00;
+  --color-tertiary-container: #bc8700;
+  --color-on-tertiary-container: #392600;
+  --color-tertiary-fixed: #ffdea8;
+  --color-tertiary-fixed-dim: #ffba20;
+  --color-on-tertiary-fixed: #271900;
+  --color-on-tertiary-fixed-variant: #5e4200;
+
+  /* Error */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+  }
+  body {
+    overscroll-behavior: none;
+    background-color: #170f27;
+    color: #eaddff;
+  }
+  ::-webkit-scrollbar { display: none; }
+}
+
+/* Mascot idle float */
+@keyframes idleFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.015); }
+}
+.mascot-idle-float { animation: idleFloat 3.2s ease-in-out infinite; }
+.mascot-sad { filter: grayscale(0.5); animation: none; }
+
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
