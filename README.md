@@ -5,7 +5,7 @@
 A full-stack gamified productivity app built with **Next.js 15**, **Supabase**, and **Framer Motion**.
 
 🔗 **Live App:** [life-rpg-rho-one.vercel.app](https://life-rpg-rho-one.vercel.app)
-📹 **Walkthrough Video:** [add your video link here]
+📹 **Walkthrough Video:** [https://drive.google.com/file/d/1tS4zx4FCSAdlJqMTQFQaTpkO2iPZNVhh/view?usp=drivesdk]
 
 ---
 
@@ -145,7 +145,7 @@ As required by the hackathon rules, all third-party tools and AI assistance used
 |---|---|
 | **Groq API** (`openai/gpt-oss-20b`) | Powers the AI Coach (personalized insights) and the in-app Help Chatbot |
 | **Google Stitch** | Used to generate the initial UI design/layout, which was then customized, cleaned up, and wired to real functionality |
-| **Claude / AI coding assistant** | Used to help write and debug application code (backend logic, database integration, feature implementation) |
+| **Google Antigravity / AI coding assistant** | Used to help write and debug application code (backend logic, database integration, feature implementation) |
 | **Supabase** | Backend-as-a-Service for Auth, PostgreSQL database, and Row Level Security |
 
 No plagiarized or undisclosed course/tutorial code was used. All core logic (task CRUD, XP/leveling, streaks, attributes, shop, boss battle) was implemented and tested specifically for this hackathon submission.
